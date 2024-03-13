@@ -61,6 +61,9 @@ int main()
 	}
 	double* x = new double [n];
 	cout << "请输入x\n";
+	cout << "请输入仪器不确定度\n";
+	double instrument;
+	cin >> instrument;
 	double sum = 0;
 	for (int i = 0; i < n; i++)
 	{
@@ -79,6 +82,13 @@ int main()
 	double t = t_confidence(n);
 	double s_corrected = s * t;
 	cout << "经过t分布因子修正后的标准差为：" << s_corrected << '\n';
+	double sigma_a = t * s / pow(n, 0.5);
+	cout << "不确定度的A类分量为：" << sigma_a << '\n';
+	double sigma_b = instrument / pow(3, 0.5);
+	cout << "不确定度的B类分量为：" << sigma_b << '\n';
+	double uncertainty = pow((sigma_a * sigma_a + sigma_b * sigma_b), 0.5);
+	cout << "不确定度为：" << uncertainty << '\n';
+	
 	delete[]x;
 	system("pause");
 	return 0;
